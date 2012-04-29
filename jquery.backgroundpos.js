@@ -1,5 +1,5 @@
 ﻿/* http://keith-wood.name/backgroundPos.html
-   Background position animation for jQuery v1.0.0.
+   Background position animation for jQuery v1.0.1.
    Written by Keith Wood (kbwood{at}iinet.com.au) November 2010.
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
@@ -16,8 +16,8 @@ $.fx.step['backgroundPosition'] = $.fx.step['background-position'] = function(fx
 		var bgPos = elem.data(BG_POS); // Original background position
 		elem.css('backgroundPosition', bgPos); // Restore original position
 		fx.start = parseBackgroundPosition(bgPos);
-		fx.end = parseBackgroundPosition(fx.options.curAnim['backgroundPosition'] ||
-			fx.options.curAnim['background-position']);
+		fx.end = parseBackgroundPosition($.fn.jquery >= '1.6' ? fx.end :
+			fx.options.curAnim['backgroundPosition'] || fx.options.curAnim['background-position']);
 		for (var i = 0; i < fx.end.length; i++) {
 			if (fx.end[i][0]) { // Relative position
 				fx.end[i][1] = fx.start[i][1] + (fx.end[i][0] == '-=' ? -1 : +1) * fx.end[i][1];
@@ -54,9 +54,9 @@ function parseBackgroundPosition(value) {
 $.fn.animate = function(origAnimate) {
 	return function(prop, speed, easing, callback) {
 		if (prop['backgroundPosition'] || prop['background-position']) {
-			$(this).data(BG_POS, this.css('backgroundPosition'));
+			this.data(BG_POS, this.css('backgroundPosition') || 'center');
 		}
-		return origAnimate.apply($(this), [prop, speed, easing, callback]);
+		return origAnimate.apply(this, [prop, speed, easing, callback]);
 	};
 }($.fn.animate);
 
