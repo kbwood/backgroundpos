@@ -1,13 +1,10 @@
 ﻿/* http://keith-wood.name/backgroundPos.html
    Background position animation for jQuery v1.1.1.
    Written by Keith Wood (kbwood{at}iinet.com.au) November 2010.
-   Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
-   MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
+   Available under the MIT (https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt) license. 
    Please attribute the author if you use it. */
 
 (function($) { // Hide scope, no $ conflict
-
-var BG_POS = 'bgPos';
 
 var usesTween = !!$.Tween;
 
@@ -16,9 +13,7 @@ if (usesTween) { // jQuery 1.8+
 		get: function(tween) {
 			return parseBackgroundPosition($(tween.elem).css(tween.prop));
 		},
-		set: function(tween) {
-			setBackgroundPosition(tween);
-		}
+		set: setBackgroundPosition
 	};
 }
 else { // jQuery 1.7-
@@ -60,32 +55,14 @@ function setBackgroundPosition(tween) {
 /* Initialise the animation.
    @param  tween  (object) the animation properties */
 function initBackgroundPosition(tween) {
-	if (!usesTween) {
-		var elem = $(tween.elem);
-		var bgPos = elem.data(BG_POS); // Original background position
-		elem.css('backgroundPosition', bgPos); // Restore original position
-		tween.start = parseBackgroundPosition(bgPos);
-	}
-	tween.end = parseBackgroundPosition($.fn.jquery >= '1.6' ? tween.end :
-		tween.options.curAnim['backgroundPosition'] || tween.options.curAnim['background-position']);
+	tween.start = parseBackgroundPosition($(tween.elem).css('backgroundPosition'));
+	tween.end = parseBackgroundPosition(tween.end);
 	for (var i = 0; i < tween.end.length; i++) {
 		if (tween.end[i][0]) { // Relative position
 			tween.end[i][1] = tween.start[i][1] + (tween.end[i][0] == '-=' ? -1 : +1) * tween.end[i][1];
 		}
 	}
 	tween.set = true;
-}
-
-/* Wrap jQuery animate to preserve original backgroundPosition. */
-if (!usesTween) { // jQuery 1.7-
-	$.fn.animate = function(origAnimate) {
-		return function(prop, speed, easing, callback) {
-			if (prop['backgroundPosition'] || prop['background-position']) {
-				this.data(BG_POS, this.css('backgroundPosition') || 'left top');
-			}
-			return origAnimate.apply(this, [prop, speed, easing, callback]);
-		};
-	}($.fn.animate);
 }
 
 })(jQuery);

@@ -1,0 +1,36 @@
+{
+	"name": "kbw.backgroundpos",
+	"title": "jQuery Background Position Animation",
+	"description": "This plugin allows the position of a background image to be animated. * Specify positions by name or pixel location. * Apply standard speed and easing settings.",
+	"keywords": [
+		"animation",
+		"background",
+		"position",
+		"ui"
+	],
+	"version": "1.1.1",
+	"author": {
+		"name": "Keith Wood",
+		"url": "http://keith-wood.name/"
+	},
+	"maintainers": [
+		{
+			"name": "Keith Wood",
+			"email": "kbwood@iinet.com.au",
+			"url": "http://keith-wood.name/"
+		}
+	],
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt"
+		}
+	],
+	"bugs": "https://github.com/kbwood/backgroundpos/issues",
+	"homepage": "http://keith-wood.name/backgroundPos.html",
+	"docs": "http://keith-wood.name/backgroundPosRef.html",
+	"download": "http://keith-wood.name/backgroundPos.html",
+	"dependencies": {
+		"jquery": ">=1.5"
+	}
+}
