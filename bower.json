@@ -1,0 +1,23 @@
+{
+  "name": "backgroundpos",
+  "version": "1.1.1",
+  "homepage": "https://github.com/kbwood/backgroundpos",
+  "authors": [
+    "Keith Wood <http://keith-wood.name/index.html>"
+  ],
+  "description": "This plugin allows the position of a background image to be animated.",
+  "main": "jquery.backgroundpos.js",
+  "keywords": [
+    "jquery",
+    "background",
+    "position"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
